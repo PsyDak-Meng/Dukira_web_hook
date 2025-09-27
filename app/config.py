@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     # AI Model
     ai_model_api_url: Optional[str] = None
     ai_model_api_key: Optional[str] = None
+    use_test_model: bool = False
     
     # App Settings
     app_name: str = "Dukira Webhook API"

@@ -12,6 +12,7 @@ from ..models import ProductImage, ImageStatus
 from ..crud import product as product_crud
 from ..config import settings
 from .gcs_service import GCSService
+from .test_model import TestModel
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +20,7 @@ logger = logging.getLogger(__name__)
 class ImageService:
     def __init__(self):
         self.gcs_service = GCSService()
+        self.test_model = TestModel() if settings.use_test_model else None
     
     async def process_image(self, db: Session, image_id: int):
         """Process a single image through the complete pipeline"""
@@ -146,6 +148,11 @@ class ImageService:
     
     async def _process_with_ai(self, image_data: bytes, image_url: str) -> Optional[Dict[str, Any]]:
         """Process image with AI model for quality assessment"""
+        # Use test model if configured
+        if settings.use_test_model and self.test_model:
+            logger.info("Using TestModel for image analysis")
+            return await self.test_model.analyze_image(image_data, image_url)
+        
         if not settings.ai_model_api_url or not settings.ai_model_api_key:
             logger.warning("AI model not configured, skipping AI processing")
             return None
