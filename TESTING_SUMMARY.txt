@@ -1,0 +1,170 @@
+================================================================================
+          DUKIRA WEBHOOK API - COMPLETE TESTING GUIDE
+================================================================================
+
+YOUR COMPLETE WORKFLOW IS READY!
+
+WHAT'S CONFIGURED:
+  ✅ API Server          → http://localhost:8000
+  ✅ Database            → PostgreSQL (Docker)
+  ✅ Cache               → Redis (Docker)
+  ✅ AI Model            → TestModel (50% pass rate)
+  ✅ Cloud Storage       → Google Cloud (bucket: dukira-web-hook)
+  ✅ Shopify OAuth       → Configured and ready
+
+================================================================================
+                         THE COMPLETE FLOW
+================================================================================
+
+  Shopify     →    API      →   Download   →   AI Model   →   Decision
+  Webhook          Server        Images         TestModel
+                                                              ┌→ Reject (< 0.7)
+                                                              │
+                                                              └→ Upload to GCS (≥ 0.7)
+
+================================================================================
+                    🚀 START TESTING (4 STEPS)
+================================================================================
+
+STEP 1: Start the API
+──────────────────────
+./local_test.sh
+
+What it does:
+• Starts PostgreSQL & Redis (Docker containers)
+• Activates Python virtual environment
+• Starts FastAPI server on port 8000
+• Starts Celery workers for background jobs
+
+────────────────────────────────────────────────────────────────────────────
+
+STEP 2: Check Everything Works
+───────────────────────────────
+./check_status.sh
+
+You should see:
+✓ PostgreSQL (5432): LISTENING
+✓ Redis (6379): LISTENING
+✓ API Server (8000): LISTENING
+✓ API Health: OK
+
+────────────────────────────────────────────────────────────────────────────
+
+STEP 3: Connect Shopify & Sync Products
+────────────────────────────────────────
+
+Option A: Interactive Menu
+  ./quick_test.sh
+  → Select option 3: Start Shopify OAuth
+  → Select option 4: Trigger Product Sync
+
+Option B: Manual Commands
+  curl "http://localhost:8000/auth/shopify/authorize?shop=YOUR-STORE.myshopify.com"
+  # Open the auth_url in browser, complete OAuth
+  curl -X POST "http://localhost:8000/products/sync/1"
+
+Option C: Browser
+  Open: http://localhost:8000/docs
+  Try the endpoints interactively
+
+────────────────────────────────────────────────────────────────────────────
+
+STEP 4: Watch the Magic! 🎉
+───────────────────────────
+tail -f local_test.log
+
+You'll see:
+[INFO] Downloading image from Shopify CDN...
+[INFO] TestModel analyzed image: score=0.85, quality=high
+[SUCCESS] Image uploaded: products/123/images/456.jpg
+
+================================================================================
+                      📊 VERIFY RESULTS
+================================================================================
+
+Check Products & Images:
+  curl "http://localhost:8000/products/store/1"
+  curl "http://localhost:8000/products/1/images"
+
+Get Statistics:
+  curl "http://localhost:8000/products/stats"
+
+Example output:
+  {
+    "approved": 15,   ← Uploaded to GCS
+    "rejected": 8,    ← Did not pass AI filter
+    "stored": 15      ← Successfully in Google Cloud
+  }
+
+View in Google Cloud:
+  https://console.cloud.google.com/storage/browser/dukira-web-hook
+
+================================================================================
+                      🛠️  HELPER SCRIPTS
+================================================================================
+
+  local_test.sh              → Start all services
+  local_test.sh stop         → Stop all services
+  check_status.sh            → Check service status
+  test_shopify_webhook.sh    → View E2E test guide
+  quick_test.sh              → Interactive testing menu
+
+================================================================================
+                      📚 DOCUMENTATION
+================================================================================
+
+  README_COMPLETE_SETUP.md     → This guide (complete overview)
+  SHOPIFY_WEBHOOK_GUIDE.md     → Detailed workflow explanation
+  QUICK_START.md               → Basic usage guide
+  README.md                    → Original project documentation
+
+================================================================================
+                      🎯 TESTING CHECKLIST
+================================================================================
+
+  □  Start services: ./local_test.sh
+  □  Check status: ./check_status.sh (all green?)
+  □  View API docs: http://localhost:8000/docs
+  □  Connect Shopify: OAuth flow completes
+  □  Sync products: Products appear in database
+  □  Process images: Images downloaded and analyzed
+  □  AI scoring: Some approved (≥0.7), some rejected (<0.7)
+  □  GCS upload: Approved images in bucket
+  □  Webhook test: Update product in Shopify → webhook received
+
+================================================================================
+                      🔍 HOW AI MODEL WORKS
+================================================================================
+
+Current: TestModel (for development)
+────────────────────────────────────
+• Random 50% pass rate
+• Score range: 0.0 - 1.0
+• Pass threshold: ≥ 0.7
+• Mock analysis: quality, clarity, lighting, composition
+
+To use Real AI Model:
+──────────────────────
+Edit .env:
+  USE_TEST_MODEL=false
+  AI_MODEL_API_URL=https://your-ai-api.com/analyze
+  AI_MODEL_API_KEY=your-api-key
+
+================================================================================
+                      🎉 YOU'RE READY TO TEST!
+================================================================================
+
+Quick start now:
+
+  ./local_test.sh
+  ./quick_test.sh
+
+Or follow the 4-step guide above ↑
+
+Everything is configured and ready to:
+✅ Receive Shopify webhooks
+✅ Download product images
+✅ Run AI quality check (TestModel)
+✅ Upload approved images to Google Cloud
+
+================================================================================

@@ -1,0 +1,128 @@
+Traceback (most recent call last):
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\base.py", line 3292, in raw_connection
+    return self.pool.connect()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    rec = pool._do_get()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 167, in _do_get
+    return self._create_connection()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 678, in __init__
+    self.__connect()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "username"
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\dakot\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\dakot\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\uvicorn\__main__.py", line 4, in <module>
+    uvicorn.main()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\click\core.py", line 1462, in __call__
+    return self.main(*args, **kwargs)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\click\core.py", line 1383, in main
+    rv = self.invoke(ctx)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\click\core.py", line 1246, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\click\core.py", line 814, in invoke
+    return callback(*args, **kwargs)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\uvicorn\main.py", line 416, in main
+    run(
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\uvicorn\main.py", line 587, in run
+    server.run()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\uvicorn\server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "C:\Users\dakot\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "C:\Users\dakot\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 646, in run_until_complete
+    return future.result()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\uvicorn\server.py", line 68, in serve
+    config.load()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\uvicorn\config.py", line 467, in load
+    self.loaded_app = import_from_string(self.app)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\uvicorn\importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "C:\Users\dakot\AppData\Local\Programs\Python\Python310\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "d:\PROJECTS\Dukira_web_hook\app\main.py", line 21, in <module>
+    Base.metadata.create_all(bind=engine)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\sql\schema.py", line 5828, in create_all
+    bind._run_ddl_visitor(
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\base.py", line 3242, in _run_ddl_visitor
+    with self.begin() as conn:
+  File "C:\Users\dakot\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\base.py", line 3232, in begin
+    with self.connect() as conn:
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\base.py", line 3268, in connect
+    return self._connection_cls(self)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2430, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\base.py", line 3292, in raw_connection
+    return self.pool.connect()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 452, in connect
+    return _ConnectionFairy._checkout(self)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 1269, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    rec = pool._do_get()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 169, in _do_get
+    with util.safe_reraise():
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\impl.py", line 167, in _do_get
+    return self._create_connection()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 393, in _create_connection
+    return _ConnectionRecord(self)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 678, in __init__
+    self.__connect()
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 902, in __connect
+    with util.safe_reraise():
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\pool\base.py", line 898, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\create.py", line 637, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\sqlalchemy\engine\default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+  File "D:\PROJECTS\Dukira_web_hook\venv\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "username"
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)

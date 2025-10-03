@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker logs:*)",
+      "Bash(cat:*)",
+      "Bash(sed:*)",
+      "Bash(./local_test.sh:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

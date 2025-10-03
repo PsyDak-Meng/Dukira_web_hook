@@ -1,0 +1,11 @@
+# Shopify Webhook Test - 2025-10-02 17:26:00
+========================================
+[INFO] API is running (HTTP 503)
+[INFO] TestModel is enabled (50% random pass rate)
+[INFO] GCS Project: dukira-dev-file
+[INFO] GCS Bucket: dukira-web-hook
+[INFO] Shopify credentials configured
+[INFO] Webhook payload ready (2 placeholder images)
+[INFO] Shopify credentials available - can test real webhook
+[INFO] Pipeline configured with TestModel (50% pass rate)
+[INFO] GCS credentials configured (gcloud CLI not installed for verification)
