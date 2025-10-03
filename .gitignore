@@ -1,5 +1,5 @@
 RULES.md
 CLAUDE.md
 .env
-.json
+*.json
 venv
